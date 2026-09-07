@@ -1,0 +1,33 @@
+table DimProcedure
+	lineageTag: d99b5d0a-ef5b-4606-830c-9ac6031863e6
+
+	column procedure_id
+		isHidden
+		formatString: 0
+		lineageTag: 63224c59-b9d2-4b3d-aa76-913c9dffbe89
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: FactSales[procedure_id]
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_name_en
+		lineageTag: 40015db2-1d52-4359-b952-22c491419222
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: FactSales[procedure_name_en]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimProcedure = calculated
+		mode: import
+		source =
+				
+				SUMMARIZE (
+				    FactSales,
+				    FactSales[procedure_id],
+				    FactSales[procedure_name_en]
+				)
+
+	annotation PBI_Id = 9a346f0e02504ea69e71816223836ab7
+

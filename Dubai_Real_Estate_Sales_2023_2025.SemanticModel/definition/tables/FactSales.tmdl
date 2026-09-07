@@ -1,0 +1,384 @@
+table FactSales
+	lineageTag: c31f75de-b363-498d-aeeb-6619fa43d55a
+
+	column transaction_id
+		dataType: string
+		isHidden
+		lineageTag: 47c651ac-a0d8-45fb-afc7-79280c054eac
+		summarizeBy: none
+		sourceColumn: transaction_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5aa49173-08f1-4d4a-a650-3236c94f3a47
+		summarizeBy: none
+		sourceColumn: procedure_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_name_en
+		dataType: string
+		isHidden
+		lineageTag: 57db7723-23c9-4554-8139-851d8c257cf8
+		summarizeBy: none
+		sourceColumn: procedure_name_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column instance_date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 7f63e719-3a15-4882-8889-1096b6bdbb5c
+		summarizeBy: none
+		sourceColumn: instance_date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column property_type_en
+		dataType: string
+		isHidden
+		lineageTag: 0d71299d-204c-44a3-bc3c-d7951a33f00b
+		summarizeBy: none
+		sourceColumn: property_type_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column property_sub_type_en
+		dataType: string
+		isHidden
+		lineageTag: aefc08e0-d8a9-424c-a3c5-d4d408cc5d2a
+		summarizeBy: none
+		sourceColumn: property_sub_type_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column reg_type_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ef7aa7a2-2e27-42d0-8083-5f432556e273
+		summarizeBy: none
+		sourceColumn: reg_type_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column reg_type_en
+		dataType: string
+		isHidden
+		lineageTag: 6ee98b31-e2bf-459d-b0c4-8ddcf9b0e5b3
+		summarizeBy: none
+		sourceColumn: reg_type_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column area_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5b589971-fb9f-4fdb-ab61-1e94ea57fa9a
+		summarizeBy: none
+		sourceColumn: area_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column area_name_en
+		dataType: string
+		isHidden
+		lineageTag: 37c8d4e8-a763-44b2-8154-846056869fd9
+		summarizeBy: none
+		sourceColumn: area_name_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column building_name_en
+		dataType: string
+		lineageTag: c0e5de71-27a0-4930-8f7f-56ad21ae712c
+		summarizeBy: none
+		sourceColumn: building_name_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column project_number
+		dataType: int64
+		formatString: 0
+		lineageTag: a82106e5-d01a-455b-870a-0e1e0dfe3c9c
+		summarizeBy: sum
+		sourceColumn: project_number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column project_name_en
+		dataType: string
+		lineageTag: 35997067-ed00-47d3-b18f-6110cdd6b957
+		summarizeBy: none
+		sourceColumn: project_name_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column master_project_en
+		dataType: string
+		lineageTag: 63ad8923-07ce-4621-9e8f-9a2f1f23e6d9
+		summarizeBy: none
+		sourceColumn: master_project_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nearest_landmark_en
+		dataType: string
+		lineageTag: e82d5cbc-fb1b-4d59-9616-bebb7b06dc7c
+		summarizeBy: none
+		sourceColumn: nearest_landmark_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nearest_metro_en
+		dataType: string
+		lineageTag: ab27f727-b00e-4602-b0d9-75830c2690de
+		summarizeBy: none
+		sourceColumn: nearest_metro_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nearest_mall_en
+		dataType: string
+		lineageTag: 636d75ad-3178-4046-85bb-392b5831bf0c
+		summarizeBy: none
+		sourceColumn: nearest_mall_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column rooms_en
+		dataType: string
+		lineageTag: f8db3aa1-1280-4992-b1b2-d9b7f646b28f
+		summarizeBy: none
+		sourceColumn: rooms_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_parking
+		dataType: int64
+		formatString: 0
+		lineageTag: ed7670ed-409f-4edb-95dd-75a6a6ba9ebe
+		summarizeBy: sum
+		sourceColumn: has_parking
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column procedure_area
+		dataType: double
+		lineageTag: 0aea40e5-0690-4e54-aefc-52470ce476e7
+		summarizeBy: sum
+		sourceColumn: procedure_area
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column actual_worth
+		dataType: int64
+		formatString: 0
+		lineageTag: 3aaf86a3-265b-41d0-9bae-f2d394f55383
+		summarizeBy: sum
+		sourceColumn: actual_worth
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column meter_sale_price
+		dataType: double
+		lineageTag: 67eec5a6-f653-4bed-9b3a-488934a860fb
+		summarizeBy: sum
+		sourceColumn: meter_sale_price
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column no_of_parties_role_1
+		dataType: int64
+		formatString: 0
+		lineageTag: 394db3c8-39ba-4ff7-b401-d65e0fd2eedd
+		summarizeBy: sum
+		sourceColumn: no_of_parties_role_1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column no_of_parties_role_2
+		dataType: int64
+		formatString: 0
+		lineageTag: 25db3549-a4cb-4f96-9a11-0320aea8273b
+		summarizeBy: sum
+		sourceColumn: no_of_parties_role_2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column no_of_parties_role_3
+		dataType: int64
+		formatString: 0
+		lineageTag: ebb5d5a6-e980-4af4-9c97-f2ce57034a7e
+		summarizeBy: sum
+		sourceColumn: no_of_parties_role_3
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DQ_Reason
+		dataType: string
+		isHidden
+		lineageTag: eeb41e31-76b1-42e7-aa93-bac82fe04ee3
+		summarizeBy: none
+		sourceColumn: DQ_Reason
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DQ_Flag
+		dataType: string
+		isHidden
+		lineageTag: 6113c42f-b332-4d9e-a341-cc1bf53300f9
+		summarizeBy: none
+		sourceColumn: DQ_Flag
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PropertyKey
+		dataType: string
+		isHidden
+		lineageTag: 0da5eca8-6e38-4e4a-ac6d-4b9068dfd962
+		summarizeBy: none
+		sourceColumn: PropertyKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column property_type_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2d724efd-1cb3-4fee-acae-195b17d2a532
+		summarizeBy: sum
+		sourceColumn: property_type_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column property_sub_type_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c09228a0-fab7-41b6-b536-0543513bc71b
+		summarizeBy: sum
+		sourceColumn: property_sub_type_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column property_usage_en
+		dataType: string
+		isHidden
+		lineageTag: 3341b4aa-97ae-40c7-bd6d-52bb19db0784
+		summarizeBy: none
+		sourceColumn: property_usage_en
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactSales = m
+		mode: import
+		source =
+				let
+				    Source = Table.Combine({DLD_Transactions_2023_RAW, DLD_Transactions_2024_RAW, DLD_Transactions_2025_RAW}),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([trans_group_en] = "Sales")),
+				    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Filtered Rows", {{"instance_date", type date}}, "en-GB"),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type with Locale", "DQ_Reason", each Text.Combine(
+				    List.RemoveNulls({
+				        if [actual_worth] <= 100 then "Extremely Low Transaction Value" else null,
+				        if [procedure_area] <= 1 then "Extremely Small Area" else null,
+				        if [meter_sale_price] >= 500000 then "Extremely High Price per sqm" else null,
+				        if [procedure_area] >= 1000000 then "Extremely Large Area" else null
+				    }),
+				    " | "
+				)),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "DQ_Flag", each if [DQ_Reason] = "" then "OK" else "Review"),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom1",{{"DQ_Reason", type text}, {"DQ_Flag", type text}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"transaction_id", "procedure_id", "procedure_name_en", "instance_date", "property_type_id", "property_type_en", "property_sub_type_id", "property_sub_type_en", "property_usage_en", "reg_type_id", "reg_type_en", "area_id", "area_name_en", "building_name_en", "project_number", "project_name_en", "master_project_en", "nearest_landmark_en", "nearest_metro_en", "nearest_mall_en", "rooms_en", "has_parking", "procedure_area", "actual_worth", "meter_sale_price", "no_of_parties_role_1", "no_of_parties_role_2", "no_of_parties_role_3", "DQ_Reason", "DQ_Flag"}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Removed Other Columns",{{"property_usage_en", Text.Trim, type text}, {"building_name_en", Text.Trim, type text}, {"project_name_en", Text.Trim, type text}, {"nearest_metro_en", Text.Trim, type text}}),
+				    #"Added Custom2" = Table.AddColumn(#"Trimmed Text", "PropertyKey", each Text.From([property_type_id], "en-US")
+				& "|"
+				& (if [property_sub_type_id] = null
+				    then "NO_SUBTYPE"
+				    else Text.From([property_sub_type_id], "en-US"))
+				& "|"
+				& [property_usage_en]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom2",{{"PropertyKey", type text}})
+				in
+				    #"Changed Type1"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

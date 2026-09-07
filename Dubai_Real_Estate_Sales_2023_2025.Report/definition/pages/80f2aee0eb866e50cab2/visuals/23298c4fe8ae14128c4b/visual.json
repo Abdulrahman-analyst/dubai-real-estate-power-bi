@@ -1,0 +1,218 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "23298c4fe8ae14128c4b",
+  "position": {
+    "x": 0,
+    "y": 80,
+    "z": 11001,
+    "height": 160,
+    "width": 1920,
+    "tabOrder": 11001
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimDate"
+                    }
+                  },
+                  "Property": "Year"
+                }
+              },
+              "queryRef": "DimDate.Year",
+              "nativeQueryRef": "Year",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "NativeVisualCalculation": {
+                  "Language": "dax",
+                  "Expression": "IF(ISATLEVEL([Year]), [Transactions YoY %_Base], BLANK())",
+                  "Name": "Transactions YoY %"
+                },
+                "Annotations": {
+                  "customTotalMetadata": {
+                    "baseQueryName": "Measures_Table.Sales Transactions YoY %"
+                  }
+                }
+              },
+              "queryRef": "select",
+              "nativeQueryRef": "Transactions YoY %",
+              "format": "0.0%"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures_Table"
+                    }
+                  },
+                  "Property": "Sales Transactions YoY %"
+                }
+              },
+              "queryRef": "Measures_Table.Sales Transactions YoY %",
+              "nativeQueryRef": "Transactions YoY %_Base",
+              "hidden": true,
+              "displayName": "Transactions YoY %_Base"
+            },
+            {
+              "field": {
+                "NativeVisualCalculation": {
+                  "Language": "dax",
+                  "Expression": "IF(ISATLEVEL([Year]), [Sales Value YoY %_Base], BLANK())",
+                  "Name": "Sales Value YoY %"
+                },
+                "Annotations": {
+                  "customTotalMetadata": {
+                    "baseQueryName": "Measures_Table.Total Sales Value YoY %"
+                  }
+                }
+              },
+              "queryRef": "select1",
+              "nativeQueryRef": "Sales Value YoY %",
+              "format": "0.0%"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures_Table"
+                    }
+                  },
+                  "Property": "Total Sales Value YoY %"
+                }
+              },
+              "queryRef": "Measures_Table.Total Sales Value YoY %",
+              "nativeQueryRef": "Sales Value YoY %_Base",
+              "hidden": true,
+              "displayName": "Sales Value YoY %_Base"
+            },
+            {
+              "field": {
+                "NativeVisualCalculation": {
+                  "Language": "dax",
+                  "Expression": "IF(ISATLEVEL([Year]), [Median Price per sqm YoY %_Base], BLANK())",
+                  "Name": "Median Price per sqm YoY %"
+                },
+                "Annotations": {
+                  "customTotalMetadata": {
+                    "baseQueryName": "Measures_Table.Median Price per sqm YoY %"
+                  }
+                }
+              },
+              "queryRef": "select2",
+              "nativeQueryRef": "Median Price per sqm YoY %",
+              "format": "0.0%"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures_Table"
+                    }
+                  },
+                  "Property": "Median Price per sqm YoY %"
+                }
+              },
+              "queryRef": "Measures_Table.Median Price per sqm YoY %",
+              "nativeQueryRef": "Median Price per sqm YoY %_Base",
+              "hidden": true,
+              "displayName": "Median Price per sqm YoY %_Base"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "subTotals": [
+        {
+          "properties": {
+            "perRowLevel": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "rowSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "rowHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Year-over-Year Growth'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

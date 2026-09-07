@@ -1,0 +1,40 @@
+expression DLD_Transactions_2023_RAW =
+		let
+		    Source = Csv.Document(File.Contents("C:\Users\amsmm\OneDrive\Desktop\Dubai Real Estate Data\New\DLD_Transactions_2023_RAW.csv"),[Delimiter=",", Columns=46, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"transaction_id", type text}, {"procedure_id", Int64.Type}, {"trans_group_id", Int64.Type}, {"trans_group_ar", type text}, {"trans_group_en", type text}, {"procedure_name_ar", type text}, {"procedure_name_en", type text}, {"instance_date", type text}, {"property_type_id", Int64.Type}, {"property_type_ar", type text}, {"property_type_en", type text}, {"property_sub_type_id", Int64.Type}, {"property_sub_type_ar", type text}, {"property_sub_type_en", type text}, {"property_usage_ar", type text}, {"property_usage_en", type text}, {"reg_type_id", Int64.Type}, {"reg_type_ar", type text}, {"reg_type_en", type text}, {"area_id", Int64.Type}, {"area_name_ar", type text}, {"area_name_en", type text}, {"building_name_ar", type text}, {"building_name_en", type text}, {"project_number", Int64.Type}, {"project_name_ar", type text}, {"project_name_en", type text}, {"master_project_en", type text}, {"master_project_ar", type text}, {"nearest_landmark_ar", type text}, {"nearest_landmark_en", type text}, {"nearest_metro_ar", type text}, {"nearest_metro_en", type text}, {"nearest_mall_ar", type text}, {"nearest_mall_en", type text}, {"rooms_ar", type text}, {"rooms_en", type text}, {"has_parking", Int64.Type}, {"procedure_area", type number}, {"actual_worth", Int64.Type}, {"meter_sale_price", type number}, {"rent_value", Int64.Type}, {"meter_rent_price", type number}, {"no_of_parties_role_1", Int64.Type}, {"no_of_parties_role_2", Int64.Type}, {"no_of_parties_role_3", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: c5463a4a-286f-48ff-b626-c4ccd7d5e54a
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression DLD_Transactions_2024_RAW =
+		let
+		    Source = Csv.Document(File.Contents("C:\Users\amsmm\OneDrive\Desktop\Dubai Real Estate Data\New\DLD_Transactions_2024_RAW.csv"),[Delimiter=",", Columns=46, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"transaction_id", type text}, {"procedure_id", Int64.Type}, {"trans_group_id", Int64.Type}, {"trans_group_ar", type text}, {"trans_group_en", type text}, {"procedure_name_ar", type text}, {"procedure_name_en", type text}, {"instance_date", type text}, {"property_type_id", Int64.Type}, {"property_type_ar", type text}, {"property_type_en", type text}, {"property_sub_type_id", Int64.Type}, {"property_sub_type_ar", type text}, {"property_sub_type_en", type text}, {"property_usage_ar", type text}, {"property_usage_en", type text}, {"reg_type_id", Int64.Type}, {"reg_type_ar", type text}, {"reg_type_en", type text}, {"area_id", Int64.Type}, {"area_name_ar", type text}, {"area_name_en", type text}, {"building_name_ar", type text}, {"building_name_en", type text}, {"project_number", Int64.Type}, {"project_name_ar", type text}, {"project_name_en", type text}, {"master_project_en", type text}, {"master_project_ar", type text}, {"nearest_landmark_ar", type text}, {"nearest_landmark_en", type text}, {"nearest_metro_ar", type text}, {"nearest_metro_en", type text}, {"nearest_mall_ar", type text}, {"nearest_mall_en", type text}, {"rooms_ar", type text}, {"rooms_en", type text}, {"has_parking", Int64.Type}, {"procedure_area", type number}, {"actual_worth", Int64.Type}, {"meter_sale_price", type number}, {"rent_value", Int64.Type}, {"meter_rent_price", type number}, {"no_of_parties_role_1", Int64.Type}, {"no_of_parties_role_2", Int64.Type}, {"no_of_parties_role_3", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: 28382239-ab10-464c-9f33-336c6b109313
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression DLD_Transactions_2025_RAW =
+		let
+		    Source = Csv.Document(File.Contents("C:\Users\amsmm\OneDrive\Desktop\Dubai Real Estate Data\New\DLD_Transactions_2025_RAW.csv"),[Delimiter=",", Columns=46, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"transaction_id", type text}, {"procedure_id", Int64.Type}, {"trans_group_id", Int64.Type}, {"trans_group_ar", type text}, {"trans_group_en", type text}, {"procedure_name_ar", type text}, {"procedure_name_en", type text}, {"instance_date", type text}, {"property_type_id", Int64.Type}, {"property_type_ar", type text}, {"property_type_en", type text}, {"property_sub_type_id", Int64.Type}, {"property_sub_type_ar", type text}, {"property_sub_type_en", type text}, {"property_usage_ar", type text}, {"property_usage_en", type text}, {"reg_type_id", Int64.Type}, {"reg_type_ar", type text}, {"reg_type_en", type text}, {"area_id", Int64.Type}, {"area_name_ar", type text}, {"area_name_en", type text}, {"building_name_ar", type text}, {"building_name_en", type text}, {"project_number", Int64.Type}, {"project_name_ar", type text}, {"project_name_en", type text}, {"master_project_en", type text}, {"master_project_ar", type text}, {"nearest_landmark_ar", type text}, {"nearest_landmark_en", type text}, {"nearest_metro_ar", type text}, {"nearest_metro_en", type text}, {"nearest_mall_ar", type text}, {"nearest_mall_en", type text}, {"rooms_ar", type text}, {"rooms_en", type text}, {"has_parking", Int64.Type}, {"procedure_area", type number}, {"actual_worth", Int64.Type}, {"meter_sale_price", type number}, {"rent_value", Int64.Type}, {"meter_rent_price", type number}, {"no_of_parties_role_1", Int64.Type}, {"no_of_parties_role_2", Int64.Type}, {"no_of_parties_role_3", Int64.Type}}),
+		    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Changed Type", {{"instance_date", type date}}, "en-GB")
+		in
+		    #"Changed Type with Locale"
+	lineageTag: 9db89b10-67fe-4e78-939f-9584b4465681
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

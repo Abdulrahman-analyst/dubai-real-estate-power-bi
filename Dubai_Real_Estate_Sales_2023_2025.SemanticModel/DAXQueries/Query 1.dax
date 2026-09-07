@@ -1,0 +1,108 @@
+DEFINE
+
+    MEASURE 'Measures_Table'[Sales Transactions] =
+        COUNTROWS ( FactSales )
+
+    MEASURE 'Measures_Table'[Total Sales Value] =
+        SUM ( FactSales[actual_worth] )
+
+    MEASURE 'Measures_Table'[Total Sales Area] =
+        SUM ( FactSales[procedure_area] )
+
+    MEASURE 'Measures_Table'[Average Transaction Value] =
+        DIVIDE (
+            'Measures_Table'[Total Sales Value],
+            'Measures_Table'[Sales Transactions]
+        )
+
+    MEASURE 'Measures_Table'[Median Transaction Value] =
+        MEDIAN ( FactSales[actual_worth] )
+
+    MEASURE 'Measures_Table'[Weighted Avg Price per sqm] =
+        DIVIDE (
+            'Measures_Table'[Total Sales Value],
+            'Measures_Table'[Total Sales Area]
+        )
+
+    MEASURE 'Measures_Table'[Median Price per sqm] =
+        MEDIAN ( FactSales[meter_sale_price] )
+
+    MEASURE 'Measures_Table'[Area Transaction Share %] =
+        DIVIDE (
+            'Measures_Table'[Sales Transactions],
+            CALCULATE (
+                'Measures_Table'[Sales Transactions],
+                REMOVEFILTERS ( DimArea )
+            )
+        )
+
+    MEASURE 'Measures_Table'[Area Sales Value Share %] =
+        DIVIDE (
+            'Measures_Table'[Total Sales Value],
+            CALCULATE (
+                'Measures_Table'[Total Sales Value],
+                REMOVEFILTERS ( DimArea )
+            )
+        )
+
+    MEASURE 'Measures_Table'[Registration Transaction Share %] =
+        DIVIDE (
+            'Measures_Table'[Sales Transactions],
+            CALCULATE (
+                'Measures_Table'[Sales Transactions],
+                REMOVEFILTERS ( DimRegistration )
+            )
+        )
+
+    MEASURE 'Measures_Table'[Registration Sales Value Share %] =
+        DIVIDE (
+            'Measures_Table'[Total Sales Value],
+            CALCULATE (
+                'Measures_Table'[Total Sales Value],
+                REMOVEFILTERS ( DimRegistration )
+            )
+        )
+
+EVALUATE
+
+ROW (
+    "Sales Transactions",
+        'Measures_Table'[Sales Transactions],
+
+    "Distinct Transaction IDs",
+        DISTINCTCOUNT ( FactSales[transaction_id] ),
+
+    "Count Difference",
+        'Measures_Table'[Sales Transactions]
+            - DISTINCTCOUNT ( FactSales[transaction_id] ),
+
+    "Total Sales Value",
+        'Measures_Table'[Total Sales Value],
+
+    "Total Sales Area",
+        'Measures_Table'[Total Sales Area],
+
+    "Average Transaction Value",
+        'Measures_Table'[Average Transaction Value],
+
+    "Median Transaction Value",
+        'Measures_Table'[Median Transaction Value],
+
+    "Weighted Avg Price per sqm",
+        'Measures_Table'[Weighted Avg Price per sqm],
+
+    "Median Price per sqm",
+        'Measures_Table'[Median Price per sqm],
+
+    "Area Transaction Share",
+        'Measures_Table'[Area Transaction Share %],
+
+    "Area Sales Value Share",
+        'Measures_Table'[Area Sales Value Share %],
+
+    "Registration Transaction Share",
+        'Measures_Table'[Registration Transaction Share %],
+
+    "Registration Sales Value Share",
+        'Measures_Table'[Registration Sales Value Share %]
+)

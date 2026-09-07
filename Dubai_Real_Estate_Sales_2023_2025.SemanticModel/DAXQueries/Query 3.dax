@@ -1,0 +1,491 @@
+-- =========================================================
+-- VALIDATION PACKAGE
+-- Price fields, calculation consistency, DQ sensitivity
+-- FactSales = Sales only
+-- =========================================================
+
+
+-- =========================================================
+-- RESULT 1
+-- Blank / Zero / Negative checks
+-- Percentages are out of all FactSales rows
+-- =========================================================
+
+EVALUATE
+
+UNION (
+
+    ROW (
+        "Field", "meter_sale_price",
+        "Condition", "Blank",
+        "Count",
+            COUNTROWS (
+                FILTER (
+                    FactSales,
+                    ISBLANK ( FactSales[meter_sale_price] )
+                )
+            ),
+        "Percentage",
+            DIVIDE (
+                COUNTROWS (
+                    FILTER (
+                        FactSales,
+                        ISBLANK ( FactSales[meter_sale_price] )
+                    )
+                ),
+                COUNTROWS ( FactSales )
+            )
+    ),
+
+    ROW (
+        "Field", "meter_sale_price",
+        "Condition", "Zero",
+        "Count",
+            COUNTROWS (
+                FILTER (
+                    FactSales,
+                    NOT ISBLANK ( FactSales[meter_sale_price] )
+                        && FactSales[meter_sale_price] = 0
+                )
+            ),
+        "Percentage",
+            DIVIDE (
+                COUNTROWS (
+                    FILTER (
+                        FactSales,
+                        NOT ISBLANK ( FactSales[meter_sale_price] )
+                            && FactSales[meter_sale_price] = 0
+                    )
+                ),
+                COUNTROWS ( FactSales )
+            )
+    ),
+
+    ROW (
+        "Field", "meter_sale_price",
+        "Condition", "Negative",
+        "Count",
+            COUNTROWS (
+                FILTER (
+                    FactSales,
+                    FactSales[meter_sale_price] < 0
+                )
+            ),
+        "Percentage",
+            DIVIDE (
+                COUNTROWS (
+                    FILTER (
+                        FactSales,
+                        FactSales[meter_sale_price] < 0
+                    )
+                ),
+                COUNTROWS ( FactSales )
+            )
+    ),
+
+    ROW (
+        "Field", "actual_worth",
+        "Condition", "Blank",
+        "Count",
+            COUNTROWS (
+                FILTER (
+                    FactSales,
+                    ISBLANK ( FactSales[actual_worth] )
+                )
+            ),
+        "Percentage",
+            DIVIDE (
+                COUNTROWS (
+                    FILTER (
+                        FactSales,
+                        ISBLANK ( FactSales[actual_worth] )
+                    )
+                ),
+                COUNTROWS ( FactSales )
+            )
+    ),
+
+    ROW (
+        "Field", "actual_worth",
+        "Condition", "Zero",
+        "Count",
+            COUNTROWS (
+                FILTER (
+                    FactSales,
+                    NOT ISBLANK ( FactSales[actual_worth] )
+                        && FactSales[actual_worth] = 0
+                )
+            ),
+        "Percentage",
+            DIVIDE (
+                COUNTROWS (
+                    FILTER (
+                        FactSales,
+                        NOT ISBLANK ( FactSales[actual_worth] )
+                            && FactSales[actual_worth] = 0
+                    )
+                ),
+                COUNTROWS ( FactSales )
+            )
+    ),
+
+    ROW (
+        "Field", "actual_worth",
+        "Condition", "Negative",
+        "Count",
+            COUNTROWS (
+                FILTER (
+                    FactSales,
+                    FactSales[actual_worth] < 0
+                )
+            ),
+        "Percentage",
+            DIVIDE (
+                COUNTROWS (
+                    FILTER (
+                        FactSales,
+                        FactSales[actual_worth] < 0
+                    )
+                ),
+                COUNTROWS ( FactSales )
+            )
+    ),
+
+    ROW (
+        "Field", "procedure_area",
+        "Condition", "Blank",
+        "Count",
+            COUNTROWS (
+                FILTER (
+                    FactSales,
+                    ISBLANK ( FactSales[procedure_area] )
+                )
+            ),
+        "Percentage",
+            DIVIDE (
+                COUNTROWS (
+                    FILTER (
+                        FactSales,
+                        ISBLANK ( FactSales[procedure_area] )
+                    )
+                ),
+                COUNTROWS ( FactSales )
+            )
+    ),
+
+    ROW (
+        "Field", "procedure_area",
+        "Condition", "Zero",
+        "Count",
+            COUNTROWS (
+                FILTER (
+                    FactSales,
+                    NOT ISBLANK ( FactSales[procedure_area] )
+                        && FactSales[procedure_area] = 0
+                )
+            ),
+        "Percentage",
+            DIVIDE (
+                COUNTROWS (
+                    FILTER (
+                        FactSales,
+                        NOT ISBLANK ( FactSales[procedure_area] )
+                            && FactSales[procedure_area] = 0
+                    )
+                ),
+                COUNTROWS ( FactSales )
+            )
+    ),
+
+    ROW (
+        "Field", "procedure_area",
+        "Condition", "Negative",
+        "Count",
+            COUNTROWS (
+                FILTER (
+                    FactSales,
+                    FactSales[procedure_area] < 0
+                )
+            ),
+        "Percentage",
+            DIVIDE (
+                COUNTROWS (
+                    FILTER (
+                        FactSales,
+                        FactSales[procedure_area] < 0
+                    )
+                ),
+                COUNTROWS ( FactSales )
+            )
+    )
+)
+
+
+-- =========================================================
+-- RESULT 2
+-- meter_sale_price vs actual_worth / procedure_area
+-- Valid rows:
+-- actual_worth not blank
+-- procedure_area > 0
+-- meter_sale_price not blank
+--
+-- Approved tolerance for reconciliation = AED 1 per sqm
+-- =========================================================
+
+EVALUATE
+
+VAR ValidRows =
+    FILTER (
+        FactSales,
+        NOT ISBLANK ( FactSales[actual_worth] )
+            && NOT ISBLANK ( FactSales[procedure_area] )
+            && FactSales[procedure_area] > 0
+            && NOT ISBLANK ( FactSales[meter_sale_price] )
+    )
+
+VAR RowsWithinTolerance =
+    FILTER (
+        ValidRows,
+        ABS (
+            FactSales[meter_sale_price]
+                - DIVIDE (
+                    FactSales[actual_worth],
+                    FactSales[procedure_area]
+                )
+        ) <= 1
+    )
+
+VAR RowsOutsideTolerance =
+    FILTER (
+        ValidRows,
+        ABS (
+            FactSales[meter_sale_price]
+                - DIVIDE (
+                    FactSales[actual_worth],
+                    FactSales[procedure_area]
+                )
+        ) > 1
+    )
+
+RETURN
+
+ROW (
+    "Total Sales Rows",
+        COUNTROWS ( FactSales ),
+
+    "Valid Rows for Calculation",
+        COUNTROWS ( ValidRows ),
+
+    "Rows Within AED 1 per sqm",
+        COUNTROWS ( RowsWithinTolerance ),
+
+    "Rows Outside AED 1 per sqm",
+        COUNTROWS ( RowsOutsideTolerance ),
+
+    "Within Tolerance %",
+        DIVIDE (
+            COUNTROWS ( RowsWithinTolerance ),
+            COUNTROWS ( ValidRows )
+        ),
+
+    "Outside Tolerance %",
+        DIVIDE (
+            COUNTROWS ( RowsOutsideTolerance ),
+            COUNTROWS ( ValidRows )
+        ),
+
+    "Maximum Absolute Difference",
+        MAXX (
+            ValidRows,
+            ABS (
+                FactSales[meter_sale_price]
+                    - DIVIDE (
+                        FactSales[actual_worth],
+                        FactSales[procedure_area]
+                    )
+            )
+        )
+)
+
+
+-- =========================================================
+-- RESULT 3
+-- Show mismatched rows if any
+-- Should return no rows if Result 2 shows zero mismatches
+-- =========================================================
+
+EVALUATE
+
+TOPN (
+    20,
+
+    FILTER (
+        SELECTCOLUMNS (
+            FactSales,
+
+            "transaction_id",
+                FactSales[transaction_id],
+
+            "actual_worth",
+                FactSales[actual_worth],
+
+            "procedure_area",
+                FactSales[procedure_area],
+
+            "meter_sale_price",
+                FactSales[meter_sale_price],
+
+            "Calculated Price per sqm",
+                DIVIDE (
+                    FactSales[actual_worth],
+                    FactSales[procedure_area]
+                ),
+
+            "Absolute Difference",
+                ABS (
+                    FactSales[meter_sale_price]
+                        - DIVIDE (
+                            FactSales[actual_worth],
+                            FactSales[procedure_area]
+                        )
+                ),
+
+            "DQ_Flag",
+                FactSales[DQ_Flag],
+
+            "DQ_Reason",
+                FactSales[DQ_Reason]
+        ),
+
+        NOT ISBLANK ( [actual_worth] )
+            && NOT ISBLANK ( [procedure_area] )
+            && [procedure_area] > 0
+            && NOT ISBLANK ( [meter_sale_price] )
+            && [Absolute Difference] > 1
+    ),
+
+    [Absolute Difference], DESC
+)
+
+
+-- =========================================================
+-- RESULT 4
+-- Exact DQ labels currently present in the model
+-- =========================================================
+
+EVALUATE
+
+SUMMARIZECOLUMNS (
+    FactSales[DQ_Flag],
+    FactSales[DQ_Reason],
+
+    "Rows",
+        COUNTROWS ( FactSales ),
+
+    "% of Sales",
+        DIVIDE (
+            COUNTROWS ( FactSales ),
+            CALCULATE (
+                COUNTROWS ( FactSales ),
+                REMOVEFILTERS ( FactSales[DQ_Flag] ),
+                REMOVEFILTERS ( FactSales[DQ_Reason] )
+            )
+        )
+)
+
+ORDER BY
+    FactSales[DQ_Flag],
+    FactSales[DQ_Reason]
+
+
+-- =========================================================
+-- RESULT 5
+-- DQ flag integrity checks
+-- =========================================================
+
+EVALUATE
+
+ROW (
+    "Review Rows",
+        COUNTROWS (
+            FILTER (
+                FactSales,
+                FactSales[DQ_Flag] = "Review"
+            )
+        ),
+
+    "Review Rows With Blank Reason",
+        COUNTROWS (
+            FILTER (
+                FactSales,
+                FactSales[DQ_Flag] = "Review"
+                    && ISBLANK ( FactSales[DQ_Reason] )
+            )
+        ),
+
+    "OK Rows",
+        COUNTROWS (
+            FILTER (
+                FactSales,
+                FactSales[DQ_Flag] = "OK"
+            )
+        ),
+
+    "OK Rows With Nonblank Reason",
+        COUNTROWS (
+            FILTER (
+                FactSales,
+                FactSales[DQ_Flag] = "OK"
+                    && NOT ISBLANK ( FactSales[DQ_Reason] )
+            )
+        ),
+
+    "Rows With Other DQ Flag",
+        COUNTROWS (
+            FILTER (
+                FactSales,
+                NOT (
+                    FactSales[DQ_Flag]
+                        IN { "OK", "Review" }
+                )
+            )
+        )
+)
+
+
+-- =========================================================
+-- RESULT 6
+-- Sensitivity Test:
+-- Median Price per sqm: All Sales vs DQ_Flag = OK
+-- =========================================================
+
+EVALUATE
+
+ROW (
+    "Median Price per sqm - All Sales",
+        MEDIAN ( FactSales[meter_sale_price] ),
+
+    "Median Price per sqm - OK Only",
+        CALCULATE (
+            MEDIAN ( FactSales[meter_sale_price] ),
+            FactSales[DQ_Flag] = "OK"
+        ),
+
+    "Absolute Difference",
+        CALCULATE (
+            MEDIAN ( FactSales[meter_sale_price] ),
+            FactSales[DQ_Flag] = "OK"
+        )
+            - MEDIAN ( FactSales[meter_sale_price] ),
+
+    "Sensitivity Difference %",
+        DIVIDE (
+            CALCULATE (
+                MEDIAN ( FactSales[meter_sale_price] ),
+                FactSales[DQ_Flag] = "OK"
+            )
+                - MEDIAN ( FactSales[meter_sale_price] ),
+
+            MEDIAN ( FactSales[meter_sale_price] )
+        )
+)

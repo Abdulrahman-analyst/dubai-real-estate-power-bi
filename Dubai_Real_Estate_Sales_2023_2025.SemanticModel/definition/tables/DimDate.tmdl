@@ -1,0 +1,85 @@
+table DimDate
+	lineageTag: 1c882479-4139-48a5-8e82-b3bb6f7b3367
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: General Date
+		lineageTag: 4e97f35b-6f32-4b52-aad3-cc08d5fe0404
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 928668b2-89ea-4223-bc3c-7196d21ab859
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: ce24bfb3-31af-4c35-a4da-925851ce0689
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNumber
+		isHidden
+		formatString: 0
+		lineageTag: ebfed6d6-fd48-41e1-ad02-6b1bc20fb308
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MonthNumber]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		lineageTag: 8baea728-f885-485e-9e69-b4ba58e15bf7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month]
+		sortByColumn: MonthNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		lineageTag: 352c43af-4b20-4e4d-843b-de70b9c3abb6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YearMonth]
+		sortByColumn: YearMonthSort
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonthSort
+		isHidden
+		formatString: 0
+		lineageTag: 91cb61e1-5ad3-41e3-a368-880bc31e42ea
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YearMonthSort]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimDate = calculated
+		mode: import
+		source =
+				
+				ADDCOLUMNS (
+				    CALENDAR ( DATE ( 2023, 1, 1 ), DATE ( 2025, 12, 31 ) ),
+				    "Year", YEAR ( [Date] ),
+				    "Quarter", "Q" & FORMAT ( [Date], "Q" ),
+				    "MonthNumber", MONTH ( [Date] ),
+				    "Month", FORMAT ( [Date], "MMM" ),
+				    "YearMonth", FORMAT ( [Date], "YYYY-MM" ),
+				    "YearMonthSort", YEAR ( [Date] ) * 100 + MONTH ( [Date] )
+				)
+
+	annotation PBI_Id = b018d61c186742338c4195aa0cfc655d
+

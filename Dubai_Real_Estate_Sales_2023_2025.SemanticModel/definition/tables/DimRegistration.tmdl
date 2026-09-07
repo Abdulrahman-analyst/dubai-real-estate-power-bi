@@ -1,0 +1,33 @@
+table DimRegistration
+	lineageTag: 93c3edbb-203f-4366-9770-2c3271687c79
+
+	column reg_type_id
+		isHidden
+		formatString: 0
+		lineageTag: e499375c-d48c-45db-88e6-8720d52c3b66
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: FactSales[reg_type_id]
+
+		annotation SummarizationSetBy = Automatic
+
+	column reg_type_en
+		lineageTag: 99bd647c-2298-4f95-8733-7fedc8260140
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: FactSales[reg_type_en]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimRegistration = calculated
+		mode: import
+		source =
+				
+				SUMMARIZE (
+				    FactSales,
+				    FactSales[reg_type_id],
+				    FactSales[reg_type_en]
+				)
+
+	annotation PBI_Id = e09235f6577e46cf8515d75a8c06400e
+

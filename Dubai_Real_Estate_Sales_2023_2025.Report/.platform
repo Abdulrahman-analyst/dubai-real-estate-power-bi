@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Dubai_Real_Estate_Sales_2023_2025"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "dcea77ac-0639-436e-8dc8-2c2c7facf24a"
+  }
+}

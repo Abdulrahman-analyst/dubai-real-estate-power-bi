@@ -1,0 +1,76 @@
+table DimProperty
+	lineageTag: ed12c069-2374-40ce-95a7-d30d5cb1984a
+
+	column property_type_en
+		dataType: string
+		lineageTag: 9f203071-72f7-488c-8b63-aed51dc2e8e0
+		summarizeBy: none
+		sourceColumn: property_type_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column property_sub_type_en
+		dataType: string
+		lineageTag: a6f89157-e5e2-4342-8958-820161983092
+		summarizeBy: none
+		sourceColumn: property_sub_type_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column PropertyKey
+		dataType: string
+		isHidden
+		lineageTag: 0cee7c4d-5645-4414-9bd1-8a48b2f4dc4b
+		summarizeBy: none
+		sourceColumn: PropertyKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column property_type_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fbfb906c-fc1e-47f1-abc5-4d0193433dcb
+		summarizeBy: none
+		sourceColumn: property_type_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column property_sub_type_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 404d8d6d-c923-4e5e-ac3a-d3c76c028ae3
+		summarizeBy: none
+		sourceColumn: property_sub_type_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column property_usage_en
+		dataType: string
+		lineageTag: 8dd9e552-ba2c-46c0-9489-b8a65153fea5
+		summarizeBy: none
+		sourceColumn: property_usage_en
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimProperty = m
+		mode: import
+		source =
+				let
+				    Source = FactSales,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"property_type_id", "property_type_en", "property_sub_type_id", "property_sub_type_en", "property_usage_en", "PropertyKey"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns", {"PropertyKey"})
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
