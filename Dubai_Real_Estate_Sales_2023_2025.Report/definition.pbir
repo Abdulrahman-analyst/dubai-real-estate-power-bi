@@ -1,8 +1,0 @@
-{
-  "version": "4.0",
-  "datasetReference": {
-    "byPath": {
-      "path": "../Dubai_Real_Estate_Sales_2023_2025.SemanticModel"
-    }
-  }
-}
