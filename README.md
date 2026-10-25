@@ -28,8 +28,8 @@ The project uses a historical extract from the [Dubai Real Estate Transaction da
 
 Related official catalogue pages:
 
-- [Dubai Pulse — DLD Transactions](https://www.dubaipulse.gov.ae/data/dld-transactions/dld_transactions-open)
-- [Dubai Land Department — Real Estate Open Data](https://dubailand.gov.ae/en/open-data/real-estate-data/)
+- [Dubai Pulse | DLD Transactions](https://www.dubaipulse.gov.ae/data/dld-transactions/dld_transactions-open)
+- [Dubai Land Department | Real Estate Open Data](https://dubailand.gov.ae/en/open-data/real-estate-data/)
 
 The files are treated as a **third-party mirror extract**, not as an independently verified official DLD report. The project therefore does not claim that its totals exactly reproduce published DLD statistics.
 
